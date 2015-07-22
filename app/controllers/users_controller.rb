@@ -13,14 +13,20 @@ class UsersController < ApplicationController
   end
   
   # Proccesses the new user form 
-  def create 
-    @user = User.new(params)
+  def create
+    @user = User.new(user_params)
     
     if @user.save
       redirect_to "/users"
     else
       render "new"
     end
+  end
+  
+  private
+  
+  def user_params
+    params.permit(:name, :email, :password)
   end
   
 end
