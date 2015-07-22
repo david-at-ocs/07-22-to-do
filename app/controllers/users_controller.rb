@@ -7,12 +7,35 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
   end
   
+  
+  
+  
+  # Gets the form to eidt user
+  def edit
+    @user = User.find(params[:id])
+  end
+  
+  # Proccesses the edit user form params
+  def update
+    @user = User.find(params[:id])
+    
+    if @user.update_attributes(user_params)
+      redirect_to "/users"
+    else
+      render "edit"
+    end
+  end
+  
+  
+  
+  
+  
   # Gets the form to create user
   def new
     @user = User.new
   end
   
-  # Proccesses the new user form 
+  # Proccesses the new user form params
   def create
     @user = User.new(user_params)
     
@@ -26,7 +49,7 @@ class UsersController < ApplicationController
   private
   
   def user_params
-    params.permit(:name, :email, :password)
+    params[:user].permit(:name, :email, :password)
   end
   
 end
