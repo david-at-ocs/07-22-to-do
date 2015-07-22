@@ -1,4 +1,11 @@
 Rails.application.routes.draw do
+  
+  
+  get "users" => 'users#index' # This should be changed to a login page.
+  
+  get "users/:id" => 'users#show'
+  
+  
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
