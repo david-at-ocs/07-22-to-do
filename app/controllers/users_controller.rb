@@ -48,7 +48,7 @@ class UsersController < ApplicationController
   # Proccesses the new user form params
   def create
     @user = User.new(user_params)
-    
+    the_password = BCrypt::Password.create(password)
     if @user.save
       redirect_to users_path
     else
@@ -60,6 +60,14 @@ class UsersController < ApplicationController
   
   def user_params
     params[:user].permit(:name, :email, :password)
+  end
+    
+  def encrypt_password(unencrypted_password)
+    self.password = BCrypt::Password.create(unencrypted_password)
+  end
+  
+  def correct_password?(attempted_password)
+    BCrypt::Password.new(self.password) == attempted_password
   end
   
 end

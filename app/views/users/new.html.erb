@@ -3,5 +3,6 @@
 <%= form_tag users_path, :method => "post" do %>
   <input type="text" name="user[name]" placeholder="Name">
   <input type="text" name="user[email]" placeholder="Email">
+  <input type="password" name="user[password]">
   <input type="submit" value="Add User">
 <% end %>
