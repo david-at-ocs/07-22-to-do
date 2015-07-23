@@ -4,8 +4,8 @@
     <li><a href="<%= task_path(task.id) %>"><%= task.name %></a>
       <ul>
         <li>
-          [<a href="<%= edit_user_path(task.id) %>">edit task</a>]
-          [<a href="<%= user_path(task.id) %>" data-method="delete" data-confirm="Are you sure?">delete task</a>]
+          [<a href="<%= edit_task_path(task.id) %>">edit task</a>]
+          [<a href="<%= task_path(task.id) %>" data-method="delete" data-confirm="Are you sure?">delete task</a>]
         </li>
       </ul>
     </li>
