@@ -1,26 +1,33 @@
 Rails.application.routes.draw do
   
+  
+
+  get "users/login" => 'users#login', :as => "login"
+  
+  post "users/verify_login" => 'users#verify_login', :as => "verify"
+  
   resources :tasks
+  resources :users
   
   # This should be changed to a login page.
-  get "users" => 'users#index', :as => "users"
-  
-  
-  
-  delete "users/:id" => 'users#destroy'
-  
-  
-  put "users/:id" => 'users#update'
-  
-  get "users/:id/edit" => 'users#edit', :as => "edit_user"
-  
-  
-  
-  post "users" => 'users#create'
-  
-  get "users/new" => 'users#new', :as => "new_user"
-  
-  get "users/:id" => 'users#show', :as => "user"
+  # get "users" => 'users#index', :as => "users"
+  #
+  #
+  #
+  # delete "users/:id" => 'users#destroy'
+  #
+  #
+  # put "users/:id" => 'users#update'
+  #
+  # get "users/:id/edit" => 'users#edit', :as => "edit_user"
+  #
+  #
+  #
+  # post "users" => 'users#create'
+  #
+  # get "users/new" => 'users#new', :as => "new_user"
+  #
+  # get "users/:id" => 'users#show', :as => "user"
   
   
   # The priority is based upon order of creation: first created -> highest priority.

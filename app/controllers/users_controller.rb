@@ -1,5 +1,25 @@
 class UsersController < ApplicationController
   
+  def login
+     @users = User.all
+  end
+
+
+
+
+  def verify_login
+    attempted_password = params[:user][:password]
+    @users = User.where("email" => params[:user][:email])
+    binding.pry
+    actual_password = BCrypt::Password.new(@users[0].password)
+    session[:user_id] = @users[0].id
+    if actual_password == attempted_password
+      redirect_to user_path(@users[0].id)
+    else
+      "Invalid login."
+    end
+  end
+  
   def index
     @users = User.all
   end
@@ -57,6 +77,15 @@ class UsersController < ApplicationController
   end
   
   private
+  
+  
+  def current_user
+    if session[:user_id]
+      @current_user = User.find(session[:user_id])
+    else
+      redirect_to "/"
+    end
+  end
   
   def user_params
     params[:user].permit(:name, :email, :password)
