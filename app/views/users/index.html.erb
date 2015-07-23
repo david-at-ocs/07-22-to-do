@@ -1,11 +1,15 @@
 <h1>Users</h1>
 <ul>
   <% @users.all.each do |user| %>
-    <li><a href="users/<%= user.id %>"><%= user.name %></a>
+    <li><a href="<%= user_path(user.id) %>"><%= user.name %></a>
       <ul>
         <li><%= user.email %></li>
-        <li><a href="/users/<%= user.id %>" data-method="delete" data-confirm="Are you sure?">[delete this user]</a></li>
+        <li>
+          <a href="<%= edit_user_path(user.id) %>">[edit this user's info]</a>
+          <a href="<%= user_path(user.id) %>" data-method="delete" data-confirm="Are you sure?">[delete this user]</a>
+        </li>
       </ul>
     </li>
   <% end %>
+  <li><p><a href="<%= new_user_path %>">New User</a></p></li>
 </ul>

@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   
-  
-  get "users" => 'users#index' # This should be changed to a login page.
+  # This should be changed to a login page.
+  get "users" => 'users#index', :as => "users"
   
   
   
@@ -10,15 +10,15 @@ Rails.application.routes.draw do
   
   put "users/:id" => 'users#update'
   
-  get "users/:id/edit" => 'users#edit'
+  get "users/:id/edit" => 'users#edit', :as => "edit_user"
   
   
   
   post "users" => 'users#create'
   
-  get "users/new" => 'users#new'
+  get "users/new" => 'users#new', :as => "new_user"
   
-  get "users/:id" => 'users#show'
+  get "users/:id" => 'users#show', :as => "user"
   
   
   # The priority is based upon order of creation: first created -> highest priority.

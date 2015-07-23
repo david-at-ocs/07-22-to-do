@@ -1,6 +1,6 @@
 <h1>New User</h1>
 
-<%= form_tag "/users", :method => "post" do %>
+<%= form_tag users_path, :method => "post" do %>
   <input type="text" name="user[name]" placeholder="Name">
   <input type="text" name="user[email]" placeholder="Email">
   <input type="submit" value="Add User">
