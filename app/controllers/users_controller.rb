@@ -10,13 +10,12 @@ class UsersController < ApplicationController
   def verify_login
     attempted_password = params[:user][:password]
     @users = User.where("email" => params[:user][:email])
-    binding.pry
     actual_password = BCrypt::Password.new(@users[0].password)
     session[:user_id] = @users[0].id
     if actual_password == attempted_password
       redirect_to user_path(@users[0].id)
     else
-      "Invalid login."
+      render login
     end
   end
   
