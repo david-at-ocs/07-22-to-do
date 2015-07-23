@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
   
+  resources :tasks
+  
   # This should be changed to a login page.
   get "users" => 'users#index', :as => "users"
   

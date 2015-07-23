@@ -1,0 +1,6 @@
+<h1><%= @task.name %></h1>
+<ul>
+  <li>
+    [<a href="<%= edit_task_path(@task.id) %>">edit this task</a>]
+    [<a href="<%= task_path(@task.id) %>" data-method="delete" data-confirm="Are you sure?">delete this task</a>]
+  </li>

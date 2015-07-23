@@ -1,0 +1,7 @@
+<h1>Edit Task</h1>
+
+<%= form_tag task_path(@task.id), :method => "put" do %>
+  <input type="checkbox" name="task[completed]" value="1">
+  <input type="text" name="task[name]" placeholder="<%= @task.name %>" value="<%= @task.name %>">
+  <input type="submit" value="Edit Task">
+<% end %>
