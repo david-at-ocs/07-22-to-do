@@ -4,6 +4,10 @@ Rails.application.routes.draw do
   get "users" => 'users#index' # This should be changed to a login page.
   
   
+  
+  delete "users/:id" => 'users#destroy'
+  
+  
   put "users/:id" => 'users#update'
   
   get "users/:id/edit" => 'users#edit'
