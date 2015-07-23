@@ -5,8 +5,8 @@
       <ul>
         <li><%= user.email %></li>
         <li>
-          <a href="<%= edit_user_path(user.id) %>">[edit this user's info]</a>
-          <a href="<%= user_path(user.id) %>" data-method="delete" data-confirm="Are you sure?">[delete this user]</a>
+          [<a href="<%= edit_user_path(user.id) %>">edit this user's info</a>]
+          [<a href="<%= user_path(user.id) %>" data-method="delete" data-confirm="Are you sure?">delete this user</a>]
         </li>
       </ul>
     </li>
