@@ -1,8 +1,4 @@
 class UsersController < ApplicationController
-  
-  def login
-     @users = User.all
-  end
 
 
 
@@ -13,18 +9,23 @@ class UsersController < ApplicationController
     actual_password = BCrypt::Password.new(@users[0].password)
     session[:user_id] = @users[0].id
     if actual_password == attempted_password
-      redirect_to user_path(@users[0].id)
+      redirect_to profile_path # user_path(@users[0].id)
     else
-      render login
+      render login_path
     end
+  end
+ 
+  def logout
+    session.clear
+    redirect_to login_path
   end
   
   def index
     @users = User.all
   end
   
-  def show
-    @user = User.find(params[:id])
+  def show    
+    @user = User.find(session[:user_id])
   end
   
   
@@ -40,7 +41,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     
     if @user.update_attributes(user_params)
-      redirect_to users_path
+      redirect_to profile_path
     else
       render "edit"
     end
@@ -68,10 +69,12 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     @user.encrypt_password(user_params[:password])
+    # session[user] = @users[0].id
     if @user.save
-      redirect_to users_path
+      session[:user_id] = @user.id
+      redirect_to profile_path #user_path(session[:user_id])
     else
-      render "new"
+      render users_path
     end
   end
   
@@ -82,7 +85,7 @@ class UsersController < ApplicationController
     if session[:user_id]
       @current_user = User.find(session[:user_id])
     else
-      redirect_to "/"
+      redirect_to login
     end
   end
   

@@ -6,6 +6,10 @@ Rails.application.routes.draw do
   
   post "users/verify_login" => 'users#verify_login', :as => "verify"
   
+  post "users/profile" => 'users#show', :as => "profile"
+  
+  get "users/logout" => 'users#logout', :as => "logout"
+  
   resources :tasks
   resources :users
   

@@ -11,6 +11,6 @@ class User < ActiveRecord::Base
   
   def correct_password?(attempted_password)
     BCrypt::Password.new(self.password) == attempted_password
-  end  
+  end
   
 end
