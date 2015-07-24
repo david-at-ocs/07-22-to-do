@@ -7,8 +7,8 @@
   <%= csrf_meta_tags %>
 </head>
 <header>
-  <% if !session[:user_id].nil? %>
-    <%= @user.email %>
+  <% if !@users.nil? %>
+    <a href="<%= profile_path %>"><%= @users.email %></a>
   <% end %>
 </header>
 <body>

@@ -6,10 +6,14 @@ class UsersController < ApplicationController
   def verify_login
     attempted_password = params[:user][:password]
     @users = User.where("email" => params[:user][:email])
-    actual_password = BCrypt::Password.new(@users[0].password)
-    session[:user_id] = @users[0].id
-    if actual_password == attempted_password
-      redirect_to profile_path # user_path(@users[0].id)
+    if !@users[0].nil?
+      actual_password = BCrypt::Password.new(@users[0].password)
+      if actual_password == attempted_password
+        session[:user_id] = @users[0].id
+        redirect_to profile_path # user_path(@users[0].id)
+      else
+        render login_path
+      end
     else
       render login_path
     end
@@ -26,7 +30,8 @@ class UsersController < ApplicationController
   
   def show
     if !session[:user_id].nil?
-      @user = User.find(session[:user_id])
+      @users = User.find(session[:user_id])
+      @tasks = Task.where("user_id" => session[:user_id])
       profile_path
     else
       redirect_to login_path
@@ -38,14 +43,14 @@ class UsersController < ApplicationController
   
   # Gets the form to eidt user
   def edit
-    @user = User.find(params[:id])
+    @users = User.find(params[:id])
   end
   
   # Proccesses the edit user form params
   def update
-    @user = User.find(params[:id])
+    @users = User.find(params[:id])
     
-    if @user.update_attributes(user_params)
+    if @users.update_attributes(user_params)
       redirect_to profile_path
     else
       render "edit"
@@ -56,8 +61,8 @@ class UsersController < ApplicationController
 
   
   def destroy
-    @user = User.find(params[:id])
-    @user.destroy
+    @users = User.find(params[:id])
+    @users.destroy
     redirect_to users_path
   end
   
@@ -67,16 +72,16 @@ class UsersController < ApplicationController
   
   # Gets the form to create user
   def new
-    @user = User.new
+    @users = User.new
   end
   
   # Proccesses the new user form params
   def create
-    @user = User.new(user_params)
-    @user.encrypt_password(user_params[:password])
+    @users = User.new(user_params)
+    @users.encrypt_password(user_params[:password])
     # session[user] = @users[0].id
-    if @user.save
-      session[:user_id] = @user.id
+    if @users.save
+      session[:user_id] = @users.id
       redirect_to profile_path #user_path(session[:user_id])
     else
       render users_path

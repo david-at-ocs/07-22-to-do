@@ -43,16 +43,18 @@ class TasksController < ApplicationController
   # Gets the form to create task
   def new
     @task = Task.new
+    @users = User.find(session[:user_id])
   end
   
   # Proccesses the new task form params
   def create
     @task = Task.new(task_params)
-    if @task.save
-      redirect_to tasks_path
-    else
-      render "new"
-    end
+    binding.pry
+    # if @task.save
+    #   redirect_to tasks_path
+    # else
+    #   render "new"
+    # end
   end
   
   
