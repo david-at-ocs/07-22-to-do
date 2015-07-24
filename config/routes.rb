@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   
-  
+  get "users/home" => 'users#login', :as => "home"
 
   get "users/login" => 'users#login', :as => "login"
   
