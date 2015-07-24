@@ -24,8 +24,13 @@ class UsersController < ApplicationController
     @users = User.all
   end
   
-  def show    
-    @user = User.find(session[:user_id])
+  def show
+    if !session[:user_id].nil?
+      @user = User.find(session[:user_id])
+      profile_path
+    else
+      redirect_to login_path
+    end
   end
   
   
